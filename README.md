@@ -85,16 +85,17 @@ The application uses the dummyjson API for fetching product and user data.
 - **Redux:** A predictable state container for JavaScript apps.
 - **React Router:** A collection of navigational components.
 - **CSS Modules:** A CSS file in which all class and animation names are scoped locally by default.
-- **Vite:** A
+- **Vite:** A build tool that aims to provide a faster and leaner development experience for modern web projects.
 
 # Setup and Installation
 
-1. Clone the repository: git clone https://github.com/KIvancevic/KING-ICT-SPA.git
+1. Clone the repository: `git clone https://github.com/KIvancevic/KING-ICT-SPA.git`
 
 2. Install dependencies:
-   cd yourproject
-   npm install
 
-3. Start the development server: npm run dev
+- `cd yourproject`
+- `npm install`
+
+3. Start the development server: `npm run dev`
 
 4. Open your browser and navigate to: http://localhost:5173/
