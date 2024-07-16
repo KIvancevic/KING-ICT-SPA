@@ -1,0 +1,29 @@
+.profile-page {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.profile-page h2 {
+  margin-bottom: 20px;
+}
+
+.profile-page p {
+  margin: 10px 0;
+}
+
+.profile-page button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-page button:hover {
+  background-color: #0056b3;
+}
