@@ -5,7 +5,6 @@ import { makeGetUserCart } from "../redux/selectors/cartSelectors";
 import Toast from "./Toast";
 import "./ProductCard.css";
 
-// Create a memoized selector instance outside the component
 const getUserCart = makeGetUserCart();
 
 const ProductCard = ({ product, onDetailsClick }) => {
@@ -48,13 +47,18 @@ const ProductCard = ({ product, onDetailsClick }) => {
   };
 
   return (
-    <div className="product-card">
+    <div className="product-card" data-testid={`product-card-${product.id}`}>
       <img src={images} alt={product.title} />
       <h3>{product.title}</h3>
       <p>${product.price}</p>
       <p>{product.description.slice(0, 100)}...</p>
       <div className="actions">
-        <button onClick={() => onDetailsClick(product)}>More details</button>
+        <button
+          data-testid={`details-button-${product.id}`}
+          onClick={() => onDetailsClick(product)}
+        >
+          More details
+        </button>
         <button
           onClick={handleAddToCart}
           aria-label={`Add ${product.title} to cart`}

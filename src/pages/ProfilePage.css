@@ -2,7 +2,7 @@
   max-width: 600px;
   margin: auto;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #5e4dcd;
   border-radius: 5px;
   text-align: center;
 }
@@ -13,17 +13,30 @@
 
 .profile-page p {
   margin: 10px 0;
+  text-align: left;
+}
+
+.not-logged-in {
+  color: red;
 }
 
 .profile-page button {
+  margin-top: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #5e4dcd;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .profile-page button:hover {
-  background-color: #0056b3;
+  background-color: #5e5dcd;
+}
+
+.profile-page button:focus,
+.profile-page button:focus-visible {
+  border: 1px solid #3898ec;
+  outline: none;
 }

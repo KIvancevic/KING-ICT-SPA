@@ -9,9 +9,15 @@
 .filter select {
   padding: 10px;
   margin: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid #5e4dcd;
   border-radius: 5px;
   width: 100%;
+}
+
+.filter select:focus,
+.filter select:focus-visible {
+  border: 1px solid #3898ec;
+  outline: none;
 }
 
 @media (max-width: 480px) {

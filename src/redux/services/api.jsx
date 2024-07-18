@@ -2,7 +2,6 @@ import axios from "axios";
 
 const API_BASE_URL = "https://dummyjson.com";
 
-// Create an instance of axios with the base URL
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
@@ -19,9 +18,15 @@ export const fetchProducts = async (
     let params = {
       limit: 0,
       skip: 0,
+      category: filter.category,
+      priceRange: filter.priceRange.join(","),
+      searchTerm,
+      sortKey: sort.key,
+      sortOrder: sort.order,
     };
 
     const response = await api.get(endpoint, { params });
+
     let products = response.data.products;
 
     if (filter.category) {

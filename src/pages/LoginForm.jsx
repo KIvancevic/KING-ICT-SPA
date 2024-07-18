@@ -35,7 +35,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (error) {
-      console.log("error useEffect fired");
       setToast({ message: error.message || "Login failed", type: "error" });
       setErrors({
         username:
@@ -45,7 +44,9 @@ const LoginForm = () => {
       });
     } else if (user) {
       setToast({ message: "Successfully logged in!", type: "success" });
-      setTimeout(() => navigate("/"), 3000);
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
   }, [error, user, navigate]);
 
@@ -59,8 +60,9 @@ const LoginForm = () => {
     <form className="login-form" onSubmit={handleSubmit}>
       {toast.message && <Toast message={toast.message} type={toast.type} />}
       <div className="form-group">
-        <label>Username</label>
+        <label htmlFor="username">Username</label>
         <input
+          id="username"
           type="text"
           value={username}
           ref={usernameRef}
@@ -69,8 +71,9 @@ const LoginForm = () => {
         {errors.username && <span className="error">{errors.username}</span>}
       </div>
       <div className="form-group">
-        <label>Password</label>
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

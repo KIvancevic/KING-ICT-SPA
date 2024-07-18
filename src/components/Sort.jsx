@@ -16,7 +16,11 @@ const Sort = () => {
 
   return (
     <>
-      <select onChange={handleSortChange} value={`${sort.key}-${sort.order}`}>
+      <select
+        data-testid="sort-select"
+        onChange={handleSortChange}
+        value={`${sort.key}-${sort.order}`}
+      >
         <option value="">Sort by</option>
         <option value="price-asc">Price: Low to High</option>
         <option value="price-desc">Price: High to Low</option>

@@ -6,7 +6,7 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(tokenMiddleware),
-  devTools: process.env.NODE_ENV !== "production", // DevTools will be enabled only in development mode
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;

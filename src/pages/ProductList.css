@@ -39,9 +39,32 @@
 
 .cart-navbar-item {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: start;
   width: auto;
   height: 60px;
+}
+
+.cart-navbar-item img,
+.cart-navbar-item button,
+.cart-navbar-item a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-navbar-item img {
+  margin: 0 10px;
+}
+
+.cart-navbar-item button {
+  margin-left: 10px;
+  padding: 0 15px;
+  height: 40px;
+}
+
+.cart-navbar-item button {
+  height: 41px;
 }
 
 @media (max-width: 900px) {

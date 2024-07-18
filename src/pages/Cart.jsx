@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../redux/actions/cartActions";
 import { makeGetUserCart } from "../redux/selectors/cartSelectors";
@@ -17,30 +17,34 @@ const Cart = () => {
 
   useEffect(() => {
     if (user) {
-      if (JSON.stringify(cartItems) !== JSON.stringify(userCart)) {
+      if (cartItems.length !== userCart.length) {
         setCartItems(userCart);
       }
     } else {
       const storedItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      if (JSON.stringify(cartItems) !== JSON.stringify(storedItems)) {
+      if (cartItems.length !== storedItems.length) {
         setCartItems(storedItems);
       }
     }
-  }, [user, userCart, cartItems]);
+  }, [user, userCart, cartItems.length]);
 
-  const handleRemove = (id) => {
-    if (user) {
-      dispatch(removeFromCart(id, user.id));
-      setToastMessage("Removed from cart!");
-    } else {
-      const updatedItems = cartItems.filter((item) => item.id !== id);
-      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-      setCartItems(updatedItems);
-      setToastMessage("Removed from cart!");
-    }
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
-  };
+  const handleRemove = useCallback(
+    (id) => {
+      if (user) {
+        dispatch(removeFromCart(id, user.id));
+        setToastMessage("Removed from cart!");
+      } else {
+        const updatedItems = cartItems.filter((item) => item.id !== id);
+        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+        setCartItems(updatedItems);
+        setToastMessage("Removed from cart!");
+      }
+      setShowToast(true);
+      const timer = setTimeout(() => setShowToast(false), 3000);
+      return () => clearTimeout(timer);
+    },
+    [user, cartItems, dispatch]
+  );
 
   return (
     <div className="cart">

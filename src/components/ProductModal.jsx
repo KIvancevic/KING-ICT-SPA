@@ -5,7 +5,7 @@ const ProductModal = ({ product, onClose }) => {
   if (!product) return null;
 
   return (
-    <div className="product-modal">
+    <div className="product-modal" data-testid="product-modal">
       <button onClick={onClose}>Close</button>
       <img src={product.images[0]} alt={product.title} />
       <h2>{product.title}</h2>

@@ -9,7 +9,13 @@
 .sort select {
   padding: 10px;
   margin: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid #5e4dcd;
   border-radius: 5px;
   width: 100%;
+}
+
+.sort select:focus,
+.sort select:focus-visible {
+  border: 1px solid #3898ec;
+  outline: none;
 }

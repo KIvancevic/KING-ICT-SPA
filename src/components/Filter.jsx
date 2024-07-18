@@ -23,7 +23,11 @@ const Filter = () => {
 
   return (
     <>
-      <select value={filter.category} onChange={handleCategoryChange}>
+      <select
+        data-testid="filter-select-category"
+        value={filter.category}
+        onChange={handleCategoryChange}
+      >
         <option value="">Filter by category</option>
         {categories.map((category, i) => (
           <option key={i} value={category.slug}>
@@ -32,6 +36,7 @@ const Filter = () => {
         ))}
       </select>
       <select
+        data-testid="filter-select-price"
         value={`${priceRange[0]}-${priceRange[1]}`}
         onChange={handlePriceChange}
       >

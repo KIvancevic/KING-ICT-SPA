@@ -12,7 +12,11 @@ const Toast = ({ message, type }) => {
 
   if (!visible) return null;
 
-  return <div className={`toast ${type}`}>{message}</div>;
+  return (
+    <div data-testid="toast" className={`toast ${type}`}>
+      {message}
+    </div>
+  );
 };
 
 export default Toast;

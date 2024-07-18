@@ -2,7 +2,7 @@ import React from "react";
 import "./Loader.css";
 
 const Loader = () => {
-  return <div className="loader" />;
+  return <div data-testid="loader" className="loader" />;
 };
 
 export default Loader;

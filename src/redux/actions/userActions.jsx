@@ -20,7 +20,6 @@ export const login = (username, password) => async (dispatch) => {
       localStorage.setItem("refreshToken", data.refreshToken);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
     } else {
-      console.log(data);
       dispatch({
         type: LOGIN_FAILURE,
         payload: { message: data.message || "Login failed" },

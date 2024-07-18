@@ -31,14 +31,23 @@ const ProfilePage = () => {
     navigate("/login");
   };
   return (
-    <div className="profile-page">
-      {toast.message && <Toast message={toast.message} type={toast.type} />}
+    <div className="profile-page" data-testid="profile-page">
+      {toast.message && (
+        <Toast data-testid="toast" message={toast.message} type={toast.type} />
+      )}
       <h2>User Profile</h2>
       <>
         <p>Name: {!user ? "Anonymous" : `${user.firstName}`}</p>
         <p>Email: {!user ? "Anonymous" : `${user.email}`}</p>
-        {!user && <p>Your are not logged in</p>}
-        <button onClick={!user ? navigateToLogin : handleLogout}>
+        {!user && (
+          <p data-testid="not-logged-in-message" className="not-logged-in">
+            Your are not logged in
+          </p>
+        )}
+        <button
+          data-testid="auth-button"
+          onClick={!user ? navigateToLogin : handleLogout}
+        >
           {!user ? "Log in" : "Logout"}
         </button>
       </>

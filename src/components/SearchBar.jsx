@@ -19,7 +19,9 @@ const SearchBar = () => {
   }, [searchTerm]);
 
   useEffect(() => {
-    dispatch(setSearchTermAction(debouncedSearchTerm));
+    if (debouncedSearchTerm) {
+      dispatch(setSearchTermAction(debouncedSearchTerm));
+    }
   }, [debouncedSearchTerm, dispatch]);
 
   const handleSearch = () => {
@@ -29,6 +31,7 @@ const SearchBar = () => {
   return (
     <div className="search-bar">
       <input
+        data-testid="filter-select"
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTermState(e.target.value)}

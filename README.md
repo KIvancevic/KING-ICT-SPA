@@ -7,9 +7,9 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# Description of CI/CD and Security Measures for Data Protection and Secure Data Transmission and Storage
+## Description of CI/CD and Security Measures for Data Protection and Secure Data Transmission and Storage
 
-- `Link to download file`:https://www.file.io/
+- `Link to download file`:https://file.io/uyOtgBNfQQB2
 
 # Project Overview
 
@@ -125,6 +125,12 @@ Once the development server is running, you can:
 - View product details in a modal.
 - Add products to the cart and view the cart.
 - Login with user credentials from: https://dummyjson.com/users (take username and password from wanted login user)
+
+# Running test
+
+1. npm test SomeComponent - to run individual test for component
+
+2. npm run test:ui, to run all tests and open in browser test ui
 
 ## License
 

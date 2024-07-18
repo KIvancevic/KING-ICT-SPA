@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: auto;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #5e4dcd;
   border-radius: 5px;
   text-align: center;
 }
@@ -49,6 +49,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .cart button:hover {

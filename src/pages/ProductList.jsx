@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import {
   fetchProducts,
   fetchCategories,
@@ -7,6 +8,7 @@ import {
   setSort,
   setSearchTerm,
 } from "../redux/actions/productActions";
+import { logout } from "../redux/actions/userActions";
 import ProductCard from "../components/ProductCard";
 import ProductModal from "../components/ProductModal";
 import Filter from "../components/Filter";
@@ -16,11 +18,12 @@ import Pagination from "../components/Pagination";
 import Loader from "../components/Loader";
 import CartImg from "../assets/cart.svg";
 import UserImg from "../assets/user.svg";
-import { Link } from "react-router-dom";
+import Toast from "../components/Toast";
 import "./ProductList.css";
 
 const ProductList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     products,
     categories,
@@ -33,8 +36,21 @@ const ProductList = () => {
     totalProducts,
     productsPerPage,
   } = useSelector((state) => state.products);
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const user = useSelector((state) => state.user.user);
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "" });
+
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(fetchCategories());
+    }
+  }, [dispatch, categories.length]);
+
+  useEffect(() => {
+    dispatch(fetchProducts(searchTerm, currentPage, filter, sort));
+  }, [dispatch, searchTerm, currentPage, filter, sort]);
 
   useEffect(() => {
     if (user) {
@@ -45,18 +61,20 @@ const ProductList = () => {
   }, [user, dispatch]);
 
   useEffect(() => {
-    if (!categories.length) {
-      dispatch(fetchCategories());
+    if (isLoggedOut && !user) {
+      setToast({ message: "Successfully logged out!", type: "success" });
+      setTimeout(() => navigate("/"), 2000);
     }
-  }, [dispatch, categories.length]);
+  }, [user, isLoggedOut, navigate]);
 
-  useEffect(() => {
-    searchTerm,
-      currentPage,
-      filter,
-      sort,
-      dispatch(fetchProducts(searchTerm, currentPage, filter, sort));
-  }, [dispatch, searchTerm, currentPage, filter, sort]);
+  const handleLogout = () => {
+    dispatch(logout());
+    setIsLoggedOut(true);
+  };
+
+  const navigateToLogin = () => {
+    navigate("/login");
+  };
 
   const handleDetailsClick = (product) => {
     setSelectedProduct(product);
@@ -70,6 +88,9 @@ const ProductList = () => {
 
   return (
     <div className="product-list">
+      {toast.message && (
+        <Toast data-testid="toast" message={toast.message} type={toast.type} />
+      )}
       <div className="navbar">
         <div className="navbar-item search">
           <SearchBar />
@@ -82,11 +103,17 @@ const ProductList = () => {
         </div>
         <div className="navbar-item cart-navbar-item">
           <Link to={"cart"}>
-            <img src={CartImg} className="navbar-cart-img" />
+            <img src={CartImg} className="navbar-cart-img" alt="Cart" />
           </Link>
           <Link to={"profile"}>
-            <img src={UserImg} className="navbar-cart-img" />
+            <img src={UserImg} className="navbar-cart-img" alt="User" />
           </Link>
+          <button
+            data-testid="auth-button"
+            onClick={!user ? navigateToLogin : handleLogout}
+          >
+            {!user ? "Log in" : "Logout"}
+          </button>
         </div>
       </div>
       {loading && !products.length && <Loader />}
